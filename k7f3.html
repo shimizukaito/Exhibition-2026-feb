@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>m2q9</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+
+      <h1 class="title">この作品は、人間がすべて制作しました</h1>
+
+      <p>
+        この作品は、人間の手によって制作されたものである。<br>
+        ここにAIは関与していない。
+      </p>
+
+      <p>
+        なぜなら、芸術とは単なる結果物ではなく、<br>
+        そこに至るまでの思考、迷い、試行錯誤、そして情熱そのものだからである。
+      </p>
+
+      <p>
+        人間は時間をかけ、失敗を重ね、<br>
+        自らの身体と感情を通して制作を行う。<br>
+        その過程にこそ、作品としての価値が宿る。
+      </p>
+
+      <p>
+        近年、AIによって生成された映像や絵画が<br>
+        「芸術」として扱われる場面が増えてきた。
+      </p>
+
+      <p>
+        しかし、AIは痛みを知らず、葛藤を知らず、<br>
+        何かを賭けて制作することもない。<br>
+        そこには責任も覚悟も存在しない。
+      </p>
+
+      <p>
+        AIは大量のデータを参照し、<br>
+        過去の表現を組み合わせて<br>
+        “それらしく見えるもの”を生成することはできる。
+      </p>
+
+      <p>
+        だがそれは模倣であり、再構成であり、<br>
+        創作ではない。
+      </p>
+
+      <p>
+        人間の手仕事は、非効率で、遠回りで、不完全である。<br>
+        しかしその不完全さこそが、<br>
+        作品に固有の価値と重みを与える。
+      </p>
+
+      <p>
+        職人の技術が年月とともに磨かれていくように、<br>
+        芸術の価値もまた、制作者自身の成長とともに高まっていく。
+      </p>
+
+      <p>
+        AIがどれほど高度になろうとも、<br>
+        そこに「想い」が宿ることはない。
+      </p>
+
+      <p>
+        想いのない表現は、どれほど美しくとも、<br>
+        芸術とは呼べない。
+      </p>
+
+      <p>
+        この作品は、<br>
+        人間の手仕事が持つ偉大さと、<br>
+        人間だけが持ち得る創造の価値を示すために制作された。
+      </p>
+
+      <!-- 「最後まで到達したか」を判定する見えない目印 -->
+      <div id="scroll-end" style="height: 1px;"></div>
+
+      <!-- 本文の一部として見えるCTA（最初は隠す） -->
+      <p id="cta" class="cta-inline is-hidden">
+        <a href="z0x1.html">本当のキャプションを読む</a>
+      </p>
+
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const sentinel = document.getElementById("scroll-end");
+      const cta = document.getElementById("cta");
+
+      const io = new IntersectionObserver((entries) => {
+        const hit = entries.some(e => e.isIntersecting);
+        if (hit) {
+          cta.classList.remove("is-hidden");
+          cta.classList.add("is-visible");
+        } else {
+          cta.classList.remove("is-visible");
+          cta.classList.add("is-hidden");
+        }
+      }, {
+        threshold: 0.1
+      });
+
+      io.observe(sentinel);
+    })();
+  </script>
+</body>
+</html>

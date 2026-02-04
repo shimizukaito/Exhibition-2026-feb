@@ -1,0 +1,183 @@
+:root{
+  --bg:#f7f7f7;
+  --fg:#111;
+  --muted:#666;
+  --line:#ddd;
+  --card:#fff;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  background:var(--bg);
+  color:var(--fg);
+  line-height:1.8;
+}
+
+.container{
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 44px 20px 64px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:22px 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+h1{
+  font-size:1.7rem;
+  margin:0 0 0.2em;
+}
+
+.meta{
+  color:var(--muted);
+  font-size:0.95rem;
+  margin-bottom: 1.2em;
+}
+
+hr{
+  border:none;
+  border-top:1px solid var(--line);
+  margin: 1.6em 0;
+}
+
+a{
+  color:inherit;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.footer{
+  margin-top: 1.6em;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.badge{
+  display:inline-block;
+  font-size:0.82rem;
+  color:var(--muted);
+  border:1px solid var(--line);
+  padding:4px 10px;
+  border-radius:999px;
+  margin-bottom: 10px;
+}
+/* ===== タイトル ===== */
+.title {
+  text-align: center;
+  font-size: 2.2rem;   /* 少し大きめ */
+  margin-top: 2em;
+  margin-bottom: 2em; /* 本文と距離を取る */
+  font-weight: 500;
+}
+
+/* ===== 本文 ===== */
+.card p {
+  margin-bottom: 1.5em;
+}
+
+/* ===== 続きを読むリンク ===== */
+.cta {
+  margin-top: 3em;        /* 本文からしっかり離す */
+  text-align: center;
+}
+
+.cta a {
+  font-size: 1rem;      /* タイトルと同じサイズ */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.cta a:hover {
+  text-decoration: underline;
+}
+
+/* ===== CTA: スクロール到達で下から浮き出る ===== */
+.cta-float {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  display: flex;
+  justify-content: center;
+  pointer-events: none; /* 透明時に邪魔しない */
+  z-index: 999;
+}
+
+.cta-float a {
+  pointer-events: auto;
+  display: inline-block;
+  background: #ffffff;
+  border: 2px solid #1e5bff;
+  color: #1e5bff;
+  border-radius: 999px;
+  padding: 14px 18px;
+  font-size: 1.6rem;       /* タイトル級にしたい場合は 2.2rem に */
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+
+  /* 初期状態：下に隠す */
+  transform: translateY(24px);
+  opacity: 0;
+  transition: transform 420ms ease, opacity 420ms ease;
+}
+
+.cta-float.is-visible a {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.cta-float a:hover {
+  background: #f3f7ff;
+}
+
+/* CTAが本文に被らないよう、ページ下に余白を確保 */
+.has-float-cta .container {
+  padding-bottom: 140px;
+}
+
+/* ===== 本文内に埋め込むCTA（最下部到達で浮き出る） ===== */
+.cta-inline {
+  margin-top: 2.6em;         /* 本文と距離 */
+  text-align: center;        /* 中央揃え */
+}
+
+/* ここが「キャプションの一部」に見えるキモ */
+.cta-inline a {
+  display: inline-block;
+  font-size: 1.15rem;        /* 本文に近いサイズ（必要なら 1.3rem など） */
+  font-weight: 600;
+  color: #1e5bff;            /* わかりやすい青 */
+  text-decoration: none;
+  border-bottom: 2px solid rgba(30,91,255,0.25);
+  padding: 6px 0;
+}
+
+/* 初期状態：その場で下に沈んで透明 */
+.cta-inline.is-hidden a {
+  opacity: 0;
+  transform: translateY(18px);
+  pointer-events: none;
+}
+
+/* 出現：その場で浮き出る */
+.cta-inline.is-visible a {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.cta-inline a {
+  transition: transform 420ms ease, opacity 420ms ease;
+}
+
+.cta-inline a:hover {
+  border-bottom-color: rgba(30,91,255,0.55);
+}
