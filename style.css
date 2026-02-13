@@ -181,3 +181,30 @@ a{
 .cta-inline a:hover {
   border-bottom-color: rgba(30,91,255,0.55);
 }
+
+/* ===== z0x1.html（body.dark）のときだけ見えるようにする ===== */
+body.dark {
+  background: #000;
+  color: #fff;
+}
+
+/* ここが重要：カードも黒系にする（白カードのままだと文字が消える） */
+body.dark .card {
+  background: transparent;   /* 既存が白なら無効化 */
+  color: #fff;
+}
+
+/* もし .card に白背景＋角丸＋影があるデザインなら、こっちでもOK
+body.dark .card {
+  background: #000;
+  color: #fff;
+}
+*/
+
+body.dark hr {
+  border-top-color: rgba(110, 110, 110, 0);
+}
+
+body.dark a {
+  color: #fff;
+}
