@@ -8,12 +8,25 @@
 
 *{ box-sizing:border-box; }
 
+/* =============================
+   Base
+============================= */
+
 body{
   margin:0;
   font-family: system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
   background:var(--bg);
   color:var(--fg);
   line-height:1.8;
+
+  /* ★ 追加：暗転演出（背景＆文字色を滑らかに） */
+  transition: background-color 2.5s ease, color 2.5s ease;
+}
+
+/* ★ 追加：読み込み後に暗転する状態 */
+body.fade-to-black{
+  background:#000;
+  color:#fff;
 }
 
 /* =============================
@@ -32,6 +45,9 @@ body{
   border-radius:16px;
   padding:22px 18px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+
+  /* ★ 追加：暗転時にも自然に追従 */
+  transition: background-color 2.5s ease, border-color 2.5s ease, color 2.5s ease, box-shadow 2.5s ease;
 }
 
 /* =============================
@@ -43,16 +59,23 @@ h1{
   margin:0 0 0.6em;
 }
 
+.title{
+  text-align: center;
+  margin: 0 0 0.6em;
+}
+
 /* =============================
    Credit（←線をここに移動）
 ============================= */
 
 .credit{
-  border-top: none;                          /* ←上線を削除 */
-  border-bottom: 1px solid var(--line);      /* ←下に線 */
+  border-top: none;
+  border-bottom: 1px solid var(--line);
   padding-bottom: 12px;
   margin-bottom: 24px;
   font-size: 0.95rem;
+
+  transition: border-color 2.5s ease;
 }
 
 /* =============================
@@ -63,10 +86,16 @@ h1{
   margin-bottom: 1.5em;
 }
 
+.text p{
+  margin-bottom: 2em;
+}
+
 hr{
   border:none;
   border-top:1px solid var(--line);
   margin: 2em 0;
+
+  transition: border-color 2.5s ease;
 }
 
 a{
@@ -82,56 +111,150 @@ a{
 }
 
 /* =============================
+   Reveal（スクロールで浮き出る文章想定）
+============================= */
+
+.reveal{
+  opacity: 0.45;
+  font-size: 0.95rem;
+}
+
+/* =============================
    Dark Theme（ネタバラシ）
+   ※ 今回は「暗転演出」を使うので、
+      theme-dark自体は"最終状態"として活かす
 ============================= */
 
 .theme-dark{
-  background:#000;
-  color:#fff;
+  background:#ffffff; /* ★最初は白にしておく（暗転演出のため） */
+  color:#000;
 }
 
 .theme-dark .card{
+  background:#fff;
+  border-color:#ddd;
+  color:#000;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.theme-dark .credit{
+  border-bottom:1px solid rgba(0,0,0,0.15);
+}
+
+.theme-dark hr{
+  border-top:1px solid rgba(0,0,0,0.15);
+}
+
+.theme-dark a{
+  color:inherit;
+}
+
+.theme-dark .footer{
+  color: var(--muted);
+}
+
+/* ★ 暗転後に "darkテーマの見た目" に切り替える */
+body.fade-to-black .card{
   background:#1a1a1a;
   border-color:#222;
   color:#fff;
   box-shadow:0 10px 30px rgba(0,0,0,0.5);
 }
 
-.theme-dark .credit{
+body.fade-to-black .credit{
   border-bottom:1px solid rgba(255,255,255,0.18);
 }
 
-.theme-dark hr{
+body.fade-to-black hr{
   border-top:1px solid rgba(255,255,255,0.2);
 }
 
-.theme-dark a{
+body.fade-to-black a{
   color:#4da3ff;
 }
 
-.theme-dark .footer{
+body.fade-to-black .footer{
   color:rgba(255,255,255,0.6);
 }
 
+body.fade-to-black .reveal{
+  opacity: 0.65;
+}
+
 /* =============================
-   Light Theme
+   CTA Button Center
 ============================= */
 
-.theme-light{
-  background:#ffffff;
-  color:#000;
-}
-
-.theme-light .card{
-  background:#fff;
-  border-color:#ddd;
-}
-
-.theme-light .credit{
-  border-bottom:1px solid rgba(0,0,0,0.15);
-}
-
-.title{
+.cta-inline {
   text-align: center;
-  margin: 0 0 0.6em;
+  margin-top: 3em;
+}
+
+.cta-inline a {
+  display: inline-block;
+  padding: 14px 26px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* hover */
+.cta-inline a:hover {
+  background: currentColor;
+  color: black;
+}
+
+/* hidden / visible animation */
+.is-hidden {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+/* Dark fade後でも綺麗に */
+body.fade-to-black .cta-inline a:hover {
+  color: black;
+}
+
+/* =============================
+   Footer Buttons
+============================= */
+
+.footer-buttons {
+  margin-top: 2.5em;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap; /* スマホで折り返す */
+}
+
+.footer-btn {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* hover */
+.footer-btn:hover {
+  background: rgba(100, 160, 255, 0.18); /* 青い光 */
+  border-color: rgba(100, 160, 255, 0.6);
+  color: rgba(100, 160, 255, 1);
+}
+
+/* 暗転後も見やすく */
+body.fade-to-black .footer-btn:hover {
+  color: black;
 }
